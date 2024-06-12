@@ -1,5 +1,7 @@
-import { useState } from "react"
+import { FormEvent, useState } from "react"
 import OpenAI from 'openai';
+import Button from '@mui/material/Button';
+import InputMultiline from "./InputMultiline";
 
 const ChatbotApp = () => {
   const openai = new OpenAI({
@@ -11,7 +13,7 @@ const ChatbotApp = () => {
   const [apiResponse, setApiResponse] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     try {
@@ -36,18 +38,16 @@ const ChatbotApp = () => {
       <div
       >
         <form onSubmit={handleSubmit}>
-          <textarea
-            type="text"
+          <InputMultiline
             value={prompt}
-            placeholder="Please ask to openai"
-            onChange={(e) => setPrompt(e.target.value)}
-          ></textarea>
-          <button
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPrompt(e.target.value)}
+          />
+          <Button
             disabled={loading || prompt.length === 0}
             type="submit"
           >
             {loading ? "Generating..." : "Generate"}
-          </button>
+          </Button>
         </form>
       </div>
       {apiResponse && (

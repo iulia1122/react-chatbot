@@ -1,11 +1,19 @@
-import logo from './logo.svg';
+
 import './App.css';
-import ChatbotApp from './components/ChatBot';
+import ChatbotApp from './components/ChatBot.tsx';
+import Layout from './components/Layout';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 
 function App() {
   return (
     <div className="App">
-      <ChatbotApp/>
+      <Layout>
+        <ChatbotApp/>
+      </Layout>
     </div>
   );
 }
