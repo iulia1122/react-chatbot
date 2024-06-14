@@ -3,11 +3,20 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    max-width: 1080px;
+    min-height: 100vh;
+    margin: auto;
   }
   
   @media (min-width: 768px) {
-    .flayout {
-      flex-direction: row;
+    .layout {
+      /* flex-direction: row; */
       justify-content: space-between;
     }
+  }
+
+  .menu__container {
+    display: flex;
+    justify-content: space-between;
+    width: 1080px;
   }

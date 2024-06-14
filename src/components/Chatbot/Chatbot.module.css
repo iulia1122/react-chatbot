@@ -1,0 +1,8 @@
+.response__header {
+    display: block;
+    margin: 1rem 0;
+}
+
+.response {
+    display: grid;
+}

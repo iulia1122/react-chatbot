@@ -1,7 +1,8 @@
 import { FormEvent, useState } from "react"
 import OpenAI from 'openai';
 import Button from '@mui/material/Button';
-import InputMultiline from "./InputMultiline";
+import InputMultiline from "../InputMultiline";
+import styles from './Chatbot.module.css';
 
 const ChatbotApp = () => {
   const openai = new OpenAI({
@@ -51,12 +52,10 @@ const ChatbotApp = () => {
         </form>
       </div>
       {apiResponse && (
-        <div
+        <div className={styles.response}
         >
-          <pre>
-            <strong>API response:</strong>
-            {apiResponse}
-          </pre>
+          <strong className={styles.response__header}>API response:</strong>
+          {apiResponse}
         </div>
       )}
     </>
