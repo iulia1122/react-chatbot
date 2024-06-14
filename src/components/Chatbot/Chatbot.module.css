@@ -6,3 +6,8 @@
 .response {
     display: grid;
 }
+
+.response__container {
+    display: flex;
+    flex-direction: column;
+}

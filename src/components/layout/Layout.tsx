@@ -4,7 +4,7 @@ import Footer from '../Footer';
 import styles from './Layout.module.css';
 import { Outlet } from 'react-router-dom';
 import Loader from '../Loader';
-import Navigation from '../Navigation';
+import Navigation from '../Navigation/Navigation';
 
 
 const Layout = () => {

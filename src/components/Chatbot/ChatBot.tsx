@@ -35,7 +35,7 @@ const ChatbotApp = () => {
 
 
   return (
-    <>
+
       <div
       >
         <form onSubmit={handleSubmit}>
@@ -50,7 +50,6 @@ const ChatbotApp = () => {
             {loading ? "Generating..." : "Generate"}
           </Button>
         </form>
-      </div>
       {apiResponse && (
         <div className={styles.response}
         >
@@ -58,7 +57,7 @@ const ChatbotApp = () => {
           {apiResponse}
         </div>
       )}
-    </>
+      </div>
   );
 };
 
