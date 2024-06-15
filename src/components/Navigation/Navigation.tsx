@@ -1,20 +1,51 @@
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import styles from './Navigation.module.css';
 
-const Navigation = () => {
-    return (<div className={styles.navigation}>
+interface Page {
+    path: string;
+    name: string;
+}
+
+interface NavigationProps {
+    pages: Page[]
+}
+
+const Navigation = ({ pages } : NavigationProps) => {
+  console.log('page are ', pages);
+
+  return (<>
+      <div className={styles.navigation}>
+
         <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/chatbot">Chatbot</Link>
-            </li>
-          </ul>
+          {pages.length ? (
+            <ul>
+              {pages.map((page) => (
+                <li key={page.name}>
+                  <NavLink
+                    to={page.path}
+                    className={({ isActive, isPending }) =>
+                      isActive
+                        ? "active"
+                        : isPending
+                        ? "pending"
+                        : ""
+                    }
+                  >
+                    <>
+                        {page.name}
+                      </>
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p></p>
+          )}
         </nav>
       </div>
-      )
+    </>
+  );
+
 }
 
 export default Navigation;
