@@ -11,7 +11,6 @@ interface NavigationProps {
 }
 
 const Navigation = ({ pages } : NavigationProps) => {
-  console.log('page are ', pages);
 
   return (<>
       <div className={styles.navigation}>

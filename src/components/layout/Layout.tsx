@@ -11,15 +11,21 @@ import { navLinks } from '../../routes/routes';
 const Layout = () => {
   return (
     <div className={styles.layout}>
-      <Header />
+
+    <Header />
     
     <div className={styles.menu__container}>
-      <Navigation pages={navLinks} />
+      <Navigation pages={navLinks} />  
+    </div>
+
+    <div className={styles.main__content}>
+
       <Suspense fallback={<Loader />}>
           <Outlet />
       </Suspense>
-      </div>
-      <Footer />
+    </div>
+
+    {/* <Footer /> */}
     </div>
   );
 }

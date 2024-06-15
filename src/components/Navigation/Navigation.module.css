@@ -1,5 +1,5 @@
 .navigation {
-    width: 300px;
+    width: 200px;
 }
 
 .navigation * {
@@ -11,6 +11,6 @@
 }
 
 .navigation li a {
-    color: black;
+    color: white;
     text-decoration: none;
 }

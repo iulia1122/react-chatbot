@@ -36,8 +36,8 @@ const ChatbotApp = () => {
 
   return (
 
-      <div
-      >
+      <div>
+        <h3> Ask me something </h3>
         <form onSubmit={handleSubmit}>
           <InputMultiline
             value={prompt}
