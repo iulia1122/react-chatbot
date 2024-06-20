@@ -1,62 +1,76 @@
-import { FormEvent, useState } from "react"
-import OpenAI from 'openai';
-import Button from '@mui/material/Button';
-import InputMultiline from "../InputMultiline";
+import { useEffect, useState } from "react"
 import styles from './Chatbot.module.css';
 
 const ChatbotApp = () => {
-  const openai = new OpenAI({
-    apiKey: process.env.REACT_APP_OPENAI_API_KEY,
-    dangerouslyAllowBrowser: true,
-  });
 
   const [prompt, setPrompt] = useState("");
   const [apiResponse, setApiResponse] = useState("");
   const [loading, setLoading] = useState(false);
+  const [question, setQuestion] = useState("");
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+
+  const fetchChatCompletion =  async () => {
+
+    if(!question) {
+      return;
+    }
+
     setLoading(true);
+
     try {
-      const result = await openai.completions.create({
-        model: "gpt-3.5-turbo-instruct",
-        prompt: prompt,
-        temperature: 0.5,
-        max_tokens: 4000,
+      return await fetch(`http://localhost:3001/openai/chatCompletion`, {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({messages: [{role: 'user', content: question}]}), 
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error(response.statusText)
+        }
+
+        console.log(response);
+        setApiResponse(response.statusText);
       });
-      console.log("response", result.choices[0].text);
-      setApiResponse(result.choices[0].text);
     } catch (e) {
       console.log(e);
       setApiResponse("Something is going wrong, Please try again.");
     }
     setLoading(false);
-  };
+    };
 
+  useEffect(() => {
+    fetchChatCompletion()
+  },[question])
+
+  const onKeyDownHandler = async(event: { key: string; }) => {
+    if(event.key === 'Enter') {
+        setQuestion(event.key);
+    }
+  };
 
   return (
 
       <div>
         <h3> Ask me something </h3>
-        <form onSubmit={handleSubmit}>
-          <InputMultiline
-            value={prompt}
+          <input 
+          type="text"
+          placeholder="Message"
+          className="input input-bordered w-full m-10"
+          value={prompt}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPrompt(e.target.value)}
+            onKeyDown={(event) => onKeyDownHandler(event)}
           />
-          <Button
-            disabled={loading || prompt.length === 0}
-            type="submit"
-          >
-            {loading ? "Generating..." : "Generate"}
-          </Button>
-        </form>
-      {apiResponse && (
-        <div className={styles.response}
-        >
-          <strong className={styles.response__header}>API response:</strong>
-          {apiResponse}
-        </div>
-      )}
+
+            {loading}
+            {loading && !apiResponse && "Generating..."}
+            {apiResponse && (
+              <div className={styles.response}
+              >
+                <strong className={styles.response__header}>API response:</strong>
+                {apiResponse}
+              </div>
+            )}
       </div>
   );
 };
