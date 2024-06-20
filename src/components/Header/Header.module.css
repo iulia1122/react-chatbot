@@ -1,11 +1,8 @@
 .header {
-  background-color: #a4c991;
-  color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 100px;
 }
 
 header h3 {

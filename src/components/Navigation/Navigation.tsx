@@ -1,20 +1,20 @@
-import { NavLink } from "react-router-dom"
-import styles from './Navigation.module.css';
+import { NavLink } from "react-router-dom";
+import styles from "./Navigation.module.css";
+import React from 'react';
 
 interface Page {
-    path: string;
-    name: string;
+  path: string;
+  name: string;
 }
 
 interface NavigationProps {
-    pages: Page[]
+  pages: Page[];
 }
 
-const Navigation = ({ pages } : NavigationProps) => {
-
-  return (<>
+const Navigation = ({ pages }: NavigationProps) => {
+  return (
+    <>
       <div className={styles.navigation}>
-
         <nav>
           {pages.length ? (
             <ul>
@@ -23,16 +23,10 @@ const Navigation = ({ pages } : NavigationProps) => {
                   <NavLink
                     to={page.path}
                     className={({ isActive, isPending }) =>
-                      isActive
-                        ? "active"
-                        : isPending
-                        ? "pending"
-                        : ""
+                      isActive ? "active" : isPending ? "pending" : ""
                     }
                   >
-                    <>
-                        {page.name}
-                      </>
+                    <>{page.name}</>
                   </NavLink>
                 </li>
               ))}
@@ -44,7 +38,6 @@ const Navigation = ({ pages } : NavigationProps) => {
       </div>
     </>
   );
-
-}
+};
 
 export default Navigation;

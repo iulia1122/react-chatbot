@@ -17,13 +17,11 @@ const ChatbotApp = () => {
   };
 
   return (
-
       <div>
-        <h3> Ask me something </h3>
           <input 
           type="text"
           placeholder="Message"
-          className="input input-bordered w-full m-10"
+          className="form-control"
           value={prompt}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPrompt(e.target.value)}
             onKeyDown={(event) => onKeyDownHandler(event)}

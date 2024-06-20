@@ -1,27 +1,28 @@
 import { Suspense } from "react";
 import Header from "../Header/Header";
-import styles from "./Layout.module.css";
 import { Outlet } from "react-router-dom";
 import Loader from "../Loader";
 import Navigation from "../Navigation/Navigation";
 import { navLinks } from "../../routes/routes";
+import React from "react";
 
 const Layout = () => {
   return (
-    <div className={styles.layout}>
+    <div className="container text-center">
       <Header />
 
-      <div className={styles.menu__container}>
-        <Navigation pages={navLinks} />
+      <div className="row">
+        <div className="col">
+          <Navigation pages={navLinks} />
+        </div>
+
+        <div className="col-10">
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
+        </div>
       </div>
 
-      <div className={styles.main__content}>
-        <Suspense fallback={<Loader />}>
-          <Outlet />
-        </Suspense>
-      </div>
-
-      {/* <Footer /> */}
     </div>
   );
 };
